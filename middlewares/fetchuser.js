@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const JWT_Secret = 'aVerySecretSignature'
+
 //creating the middleware fn to get data of the user
 const fetchuser = (req,res,next)=> {
     // console.log(req.header)
@@ -9,7 +9,7 @@ const fetchuser = (req,res,next)=> {
         res.status(401).send({error : "Invalid Token! Please authenticate your id using a valid token"})
     }
     try {
-        const data= jwt.verify(token,JWT_Secret)
+        const data= jwt.verify(token,process.env.JWT_Secret)
         req.user = data.user
         next()
         
